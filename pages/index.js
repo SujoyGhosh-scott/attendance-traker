@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Header from "../components/Header";
 
 export default function Home() {
   return (
@@ -12,8 +13,24 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
-        <p className="text-5xl font-bold text-primary comfortaa">Yo what up</p>
+      <main className="min-h-screen comfortaa">
+        <Header />
+        <div className="px-6 lg:px-72 xl:px-80">
+          <h2 className="text-3xl  font-bold mt-8 mb-3 text-gray-600">
+            Hi <span className="text-secondary">Sujoy</span>
+          </h2>
+          <p className="text-gray-700">Add today&apos;s attendance</p>
+          <p className="text-gray-700">Want to add previous attendance?</p>
+          <p className="text-gray-700">
+            Click{" "}
+            <span className="text-primary font-semibold cursor-pointer">
+              here
+            </span>
+          </p>
+          <h2 className="text-3xl text-primary font-bold mt-6 mb-3">
+            Your attendance percentage
+          </h2>
+        </div>
       </main>
 
       <footer className="border-t border-opacity-10 text-center text-sm p-1 font-mono">
