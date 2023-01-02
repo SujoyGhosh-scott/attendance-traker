@@ -23,7 +23,7 @@ const Header = () => {
         </Link>
       </div>
       <div className="tooltip tooltip-bottom" data-tip="Logout">
-        <button className="btn btn-ghost btn-circle">
+        <label htmlFor="my-modal-6" className="btn btn-ghost btn-circle">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -38,7 +38,31 @@ const Header = () => {
               d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9"
             />
           </svg>
-        </button>
+        </label>
+      </div>
+
+      {/* Put this part before </body> tag */}
+      <input type="checkbox" id="my-modal-6" className="modal-toggle" />
+      <div className="modal modal-bottom sm:modal-middle">
+        <div className="modal-box">
+          <h3 className="font-semibold text-lg">
+            Are you sure you want to logut?
+          </h3>
+          <div className="modal-action">
+            <label
+              htmlFor="my-modal-6"
+              className="btn btn-info normal-case mr-4 rounded-sm"
+            >
+              Cancel
+            </label>
+            <label
+              htmlFor="my-modal-6"
+              className="btn btn-error normal-case rounded-sm"
+            >
+              Logout
+            </label>
+          </div>
+        </div>
       </div>
     </div>
   );
