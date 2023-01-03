@@ -117,7 +117,7 @@ const IndivisualCharts = ({
       </div>
       <div className="w-full md:w-1/2 lg:w-1/3 mt-4 lg:mt-0">
         <p>
-          DSE3: {getPercentage(dse4ThA + dse4PrA, dse4ThC + dse4PrC)}% (
+          DSE4: {getPercentage(dse4ThA + dse4PrA, dse4ThC + dse4PrC)}% (
           {dse4ThA + dse4PrA}/{dse4ThC + dse4PrC})
         </p>
         <p className="text-sm">
