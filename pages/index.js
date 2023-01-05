@@ -5,6 +5,7 @@ import Header from "../components/Header";
 import IndivisualCharts from "../components/IndivisualCharts";
 import OverallChart from "../components/OverallChart";
 import axios from "axios";
+import AttendanceCards from "../components/AttendanceCards";
 
 export default function Home() {
   const [loading, setLoading] = useState(true);
@@ -67,6 +68,7 @@ export default function Home() {
             Hi <span className="text-secondary">Sujoy</span>
           </h2>
           <p className="text-gray-700">Add today&apos;s attendance</p>
+          <AttendanceCards />
           <p className="text-gray-700">Want to add previous attendance?</p>
           <p className="text-gray-700">
             Click{" "}
