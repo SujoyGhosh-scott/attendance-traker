@@ -8,13 +8,14 @@ const AttendanceCards = () => {
       dt <= new Date(end);
       dt.setDate(dt.getDate() + 1)
     ) {
-      arr.push(new Date(dt));
+      if (dt.getDay() !== 0 && dt.getDay() !== 6) arr.push(new Date(dt));
     }
     return arr;
   };
 
   const daylist = getDaysArray(new Date("2023-01-01"), new Date());
   daylist.map((v) => v.toISOString().slice(0, 10)).join("");
+  //daylist with holidays. remove holidays from academic caledner
 
   console.log(daylist);
 

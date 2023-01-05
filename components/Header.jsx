@@ -44,7 +44,7 @@ const Header = () => {
       {/* Put this part before </body> tag */}
       <input type="checkbox" id="my-modal-6" className="modal-toggle" />
       <div className="modal modal-bottom sm:modal-middle">
-        <div className="modal-box">
+        <div className="modal-box pb-40 lg:pb-6">
           <h3 className="font-semibold text-lg">
             Are you sure you want to logut?
           </h3>
