@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import moment from "moment";
 import SubRecord from "./SubRecord";
+import axios from "axios";
 
-const AttendanceCard = ({ date, subject }) => {
+const AttendanceCard = ({ date, subject, removeDate }) => {
   const [core11C, setCore11C] = useState(0);
   const [core11present, setCore11present] = useState(false);
   const [dse3thC, setdse3thC] = useState(0);
@@ -13,6 +14,44 @@ const AttendanceCard = ({ date, subject }) => {
   const [dse4thPresent, setDse4ThPresent] = useState(false);
   const [dse4prC, setDse4PrC] = useState(0);
   const [dse4PrPresent, setDse4PrPresent] = useState(false);
+
+  const addRecord = () => {
+    console.log("adding record");
+    //get roll no from localstorage
+
+    //check if present in classes with count 0
+    //check if total classes exceeds total class a day limit
+
+    const payload = {
+      roll: 102,
+      date,
+      core11C,
+      core11present,
+      dse3thC,
+      dse3thPresent,
+      dse3prC,
+      dse3PrPresent,
+      dse4thC,
+      dse4thPresent,
+      dse4prC,
+      dse4PrPresent,
+    };
+    console.log(payload);
+
+    axios
+      .post("/api/add-entry", payload)
+      .then((res) => {
+        console.log("resp: ", res.data);
+        removeDate(date);
+      })
+      .catch((err) => {
+        console.log(err.message);
+        //show alert error
+      });
+
+    //if successful, remove date from list to remove card
+    //otherwise show alert saying what went wrong
+  };
 
   return (
     <div
@@ -90,7 +129,10 @@ const AttendanceCard = ({ date, subject }) => {
         </div>
       </div>
       <div className="flex justify-end">
-        <button className="btn btn-sm btn-primary normal-case rounded-sm">
+        <button
+          onClick={() => addRecord()}
+          className="btn btn-sm btn-primary normal-case rounded-sm"
+        >
           Submit
         </button>
       </div>

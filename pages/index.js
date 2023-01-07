@@ -26,6 +26,7 @@ export default function Home() {
     //is there any token
     //verify the token,
     //if valid, get roll
+    //  store roll in localstorage
     //if not redirect to the login page
     axios
       .post("/api/data", { roll: 102 })
@@ -67,7 +68,14 @@ export default function Home() {
           <h2 className="text-3xl  font-bold mt-8 mb-3 text-gray-600">
             Hi <span className="text-secondary">Sujoy</span>
           </h2>
-          <p className="text-gray-700">Add today&apos;s attendance</p>
+          <p className="text-gray-700">
+            Add both the days you were <strong>present</strong> and{" "}
+            <strong>absent</strong> to get accurate percentage
+          </p>
+          <p className="text-gray-700">
+            And please try to add the oldest record first, this helps generate
+            the remaining attendance cards
+          </p>
           <AttendanceCards />
           <p className="text-gray-700">Want to add previous attendance?</p>
           <p className="text-gray-700">
@@ -113,6 +121,10 @@ export default function Home() {
                 attendedDse3={dse3ThA + dse3PrA}
                 totalDse4={dse4ThC + dse4PrC}
                 attendedDse4={dse4ThA + dse4PrA}
+                max={
+                  Math.max(...[core11C, dse3ThC + dse3PrC, dse4ThC + dse4PrC]) +
+                  10
+                }
               />
               <IndivisualCharts
                 core11C={core11C}

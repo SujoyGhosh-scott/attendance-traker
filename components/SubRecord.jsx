@@ -8,7 +8,10 @@ const SubRecord = ({ subject, classes, present, setPresent, setClasses }) => {
         <input
           type="checkbox"
           value={present}
-          onChange={(e) => setPresent(e.target.value)}
+          onChange={(e) => {
+            console.log(!present);
+            setPresent(!present);
+          }}
           className="toggle toggle-primary toggle-xs"
         />
       </div>
