@@ -1,7 +1,9 @@
+import moment from "moment/moment";
 import React, { useState, useEffect } from "react";
+import { listOfNoClassDays } from "../lib/listOfNoClassDays";
 import AttendanceCard from "./AttendanceCard";
 
-const AttendanceCards = () => {
+const AttendanceCards = ({ lastUpdated = "2023-01-01" }) => {
   const [daylist, setDaylist] = useState([]);
 
   useEffect(() => {
@@ -11,14 +13,25 @@ const AttendanceCards = () => {
         dt <= new Date(end);
         dt.setDate(dt.getDate() + 1)
       ) {
-        if (dt.getDay() !== 0 && dt.getDay() !== 6) arr.push(new Date(dt));
+        //if not saturday or sunday, add the date
+        // console.log(
+        //   dt,
+        //   moment(dt).format("DD/MM/YYYY"),
+        //   listOfNoClassDays.includes(moment(dt).format("DD/MM/YYYY"))
+        // );
+        if (
+          dt.getDay() !== 0 &&
+          dt.getDay() !== 6 &&
+          !listOfNoClassDays.includes(moment(dt).format("DD/MM/YYYY"))
+        ) {
+          arr.push(new Date(dt));
+        }
       }
       return arr;
     };
 
-    const temp = getDaysArray(new Date("2023-01-01"), new Date());
+    let temp = getDaysArray(new Date(lastUpdated), new Date());
     temp.map((v) => v.toISOString().slice(0, 10)).join("");
-    //daylist with holidays. remove holidays from academic caledner
 
     setDaylist(temp);
   }, []);

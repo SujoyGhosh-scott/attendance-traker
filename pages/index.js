@@ -9,6 +9,7 @@ import AttendanceCards from "../components/AttendanceCards";
 
 export default function Home() {
   const [loading, setLoading] = useState(true);
+  const [lastUpdated, setLastUpdated] = useState("01-01-2023");
   const [core11C, setCore11C] = useState(0);
   const [core11A, setCore11A] = useState(0);
 
@@ -31,10 +32,8 @@ export default function Home() {
     axios
       .post("/api/data", { roll: 102 })
       .then((res) => {
-        //console.log(res.data);
-
+        console.log(res.data);
         const { data } = res.data.user;
-
         setCore11C(data.core11C);
         setCore11A(data.core11A);
         setDse3ThC(data.dse3ThC);
@@ -45,7 +44,7 @@ export default function Home() {
         setDse4ThA(data.dse4ThA);
         setDse4PrC(data.dse4PrC);
         setDse4PrA(data.dse4PrA);
-
+        setLastUpdated(res.data.user.lastUpdated);
         setLoading(false);
       })
       .catch((err) => console.error(err.message));
@@ -76,7 +75,12 @@ export default function Home() {
             And please try to add the oldest record first, this helps generate
             the remaining attendance cards
           </p>
-          <AttendanceCards />
+          {loading ? (
+            <p className="text-gray-700">Loading cards...</p>
+          ) : (
+            <AttendanceCards lastUpdated={new Date(lastUpdated)} />
+          )}
+
           <p className="text-gray-700">Want to add previous attendance?</p>
           <p className="text-gray-700">
             Click{" "}
