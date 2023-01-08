@@ -5,7 +5,13 @@ const ReviewModal = () => {
     <>
       <input type="checkbox" id="review-modal" className="modal-toggle" />
       <div className="modal modal-bottom sm:modal-middle">
-        <div className="modal-box">
+        <div className="modal-box relative">
+          <label
+            htmlFor="review-modal"
+            className="btn btn-sm btn-circle absolute right-3 top-3"
+          >
+            ✕
+          </label>
           <h3 className="font-bold text-lg">Add Review</h3>
           <form className="py-4 form-control w-full max-w-xs">
             <label className="label">

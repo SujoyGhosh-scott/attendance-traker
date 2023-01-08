@@ -44,7 +44,11 @@ export default function Home() {
         setDse4ThA(data.dse4ThA);
         setDse4PrC(data.dse4PrC);
         setDse4PrA(data.dse4PrA);
-        setLastUpdated(res.data.user.lastUpdated);
+
+        let nextDayOfLastUpdated = new Date(res.data.user.lastUpdated);
+        nextDayOfLastUpdated.setDate(nextDayOfLastUpdated.getDate() + 1);
+        setLastUpdated(nextDayOfLastUpdated);
+
         setLoading(false);
       })
       .catch((err) => console.error(err.message));
@@ -78,7 +82,7 @@ export default function Home() {
           {loading ? (
             <p className="text-gray-700">Loading cards...</p>
           ) : (
-            <AttendanceCards lastUpdated={new Date(lastUpdated)} />
+            <AttendanceCards lastUpdated={lastUpdated} />
           )}
 
           <p className="text-gray-700">Want to add previous attendance?</p>

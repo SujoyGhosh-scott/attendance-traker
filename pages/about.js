@@ -1,10 +1,20 @@
 import Link from "next/link";
 import React from "react";
 import ReviewModal from "../components/ReviewModal";
+import Head from "next/head";
 
 const About = () => {
   return (
     <div>
+      <Head>
+        <title>Attendance Tracker About</title>
+        <meta
+          name="description"
+          content="Login page of Attendance Tracker, a website to keep track of attendance for students"
+        />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+
       <div className="px-6 comfortaa lg:px-72 xl:px-80 navbar bg-base-100 flex items-center">
         <Link href="/">
           <svg
@@ -66,7 +76,8 @@ const About = () => {
           </div>
           <div className="col-span-3 md:col-span-1 mt-3 md:mt-0">
             <Link
-              href=""
+              target="_blank"
+              href="https://github.com/SujoyGhosh-scott/attendance-traker"
               className="btn btn-primary btn-outline normal-case rounded-sm"
             >
               Source Code
@@ -88,7 +99,8 @@ const About = () => {
           </div>
           <div className="col-span-3 md:col-span-1 mt-3 md:mt-0">
             <Link
-              href=""
+              target="_blank"
+              href="https://github.com/SujoyGhosh-scott"
               className="btn btn-outline normal-case rounded-sm mt-0"
             >
               My GitHub
