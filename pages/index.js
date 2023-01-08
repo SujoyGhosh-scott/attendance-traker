@@ -6,10 +6,12 @@ import IndivisualCharts from "../components/IndivisualCharts";
 import OverallChart from "../components/OverallChart";
 import axios from "axios";
 import AttendanceCards from "../components/AttendanceCards";
+import { useRouter } from "next/router";
 
 export default function Home() {
   const [loading, setLoading] = useState(true);
   const [lastUpdated, setLastUpdated] = useState("01-01-2023");
+  const [name, setName] = useState("");
   const [core11C, setCore11C] = useState(0);
   const [core11A, setCore11A] = useState(0);
 
@@ -23,17 +25,29 @@ export default function Home() {
   const [dse4PrC, setDse4PrC] = useState(0);
   const [dse4PrA, setDse4PrA] = useState(0);
 
+  const router = useRouter();
+
   useEffect(() => {
-    //is there any token
-    //verify the token,
-    //if valid, get roll
-    //  store roll in localstorage
-    //if not redirect to the login page
+    let token = localStorage.getItem("at_token");
+
+    //console.log(token);
+
+    if (!token || token === "") {
+      localStorage.removeItem("at_token");
+      router.push("/auth/login");
+      return;
+    }
+
     axios
-      .post("/api/data", { roll: 102 })
+      .post(
+        "/api/data",
+        { roll: 102 },
+        { headers: { Authorization: `Bearer ${token}` } }
+      )
       .then((res) => {
-        console.log(res.data);
+        //console.log(res.data);
         const { data } = res.data.user;
+        setName(res.data.user.name);
         setCore11C(data.core11C);
         setCore11A(data.core11A);
         setDse3ThC(data.dse3ThC);
@@ -51,7 +65,12 @@ export default function Home() {
 
         setLoading(false);
       })
-      .catch((err) => console.error(err.message));
+      .catch((err) => {
+        console.error(err.message);
+        localStorage.removeItem("at_token");
+        router.push("/auth/login");
+        return;
+      });
   }, []);
 
   return (
@@ -69,7 +88,7 @@ export default function Home() {
         <Header />
         <div className="px-6 lg:px-72 xl:px-80">
           <h2 className="text-3xl  font-bold mt-8 mb-3 text-gray-600">
-            Hi <span className="text-secondary">Sujoy</span>
+            Hi <span className="text-secondary">{name}</span>
           </h2>
           <p className="text-gray-700">
             Add both the days you were <strong>present</strong> and{" "}
@@ -80,7 +99,7 @@ export default function Home() {
             the remaining attendance cards
           </p>
           {loading ? (
-            <p className="text-gray-700">Loading cards...</p>
+            <p className="text-gray-600 text-sm py-4">Loading cards...</p>
           ) : (
             <AttendanceCards lastUpdated={lastUpdated} />
           )}

@@ -1,20 +1,26 @@
 import DBconnect from "../../lib/db";
 import User from "../../lib/Models/User";
+import jwt from "jsonwebtoken";
 
 export default async function handler(req, res) {
   if (req.method === "POST") {
     //connection error
     DBconnect().catch((error) => console.error(error.message));
 
-    const { roll } = req.body;
-    if (!roll) {
+    //console.log("token: ", req.headers.authorization.substring(7));
+    let token = req.headers.authorization.substring(7);
+
+    if (!token) {
       res.status(400).send({
         success: false,
-        error: "Roll missing",
+        error: "Token missing",
       });
     }
 
-    //verify token
+    const verify = jwt.verify(token, process.env.JWT_SECRET);
+    console.log("verify: ", verify);
+
+    const { roll } = verify;
 
     try {
       const user = await User.findOne({ roll });
