@@ -35,13 +35,15 @@ const About = () => {
           <p className="font-bold text-lg ml-3 text-primary">Home</p>
         </Link>
       </div>
-      <main className="px-6 comfortaa lg:px-72 xl:px-80">
+      <main className="px-6 pb-6 comfortaa lg:px-72 xl:px-80">
         <h2 className="text-3xl font-bold mt-8 mb-4 text-secondary">About</h2>
         <p className="w-full xl:w-4/5">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
+          This is a website for students to keep track of their attendance
+          percentage. The student has to log their attendance of different
+          classes of every class day. If you&apos;re facing any issue while
+          login, please drop a message to the creator from the review
+          section(mentioning your contact details or mail), we will get back to
+          you.
         </p>
         <br />
         <p className="w-full xl:w-4/5">
@@ -55,7 +57,7 @@ const About = () => {
           <div className="col-span-3 md:col-span-1 mt-3 md:mt-0">
             <label
               htmlFor="review-modal"
-              className="btn btn-outline btn-warning normal-case rounded-sm mt-0"
+              className="btn btn-outline w-44 btn-warning normal-case rounded-sm mt-0"
             >
               Add Review
               <svg
@@ -78,7 +80,7 @@ const About = () => {
             <Link
               target="_blank"
               href="https://github.com/SujoyGhosh-scott/attendance-traker"
-              className="btn btn-primary btn-outline normal-case rounded-sm"
+              className="btn btn-primary btn-outline w-44 normal-case rounded-sm"
             >
               Source Code
               <svg
@@ -101,7 +103,7 @@ const About = () => {
             <Link
               target="_blank"
               href="https://github.com/SujoyGhosh-scott"
-              className="btn btn-outline normal-case rounded-sm mt-0"
+              className="btn btn-outline w-44 normal-case rounded-sm mt-0"
             >
               My GitHub
               <svg

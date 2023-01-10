@@ -1,7 +1,15 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React from "react";
 
 const Header = () => {
+  const router = useRouter();
+
+  const logout = () => {
+    localStorage.removeItem("at_token");
+    router.push("/auth/login");
+  };
+
   return (
     <div className="px-6 lg:px-72 xl:px-80 navbar bg-base-100 flex items-center justify-end">
       <div className="tooltip tooltip-bottom" data-tip="About">
@@ -56,6 +64,7 @@ const Header = () => {
               Cancel
             </label>
             <label
+              onClick={logout}
               htmlFor="my-modal-6"
               className="btn btn-error normal-case rounded-sm"
             >
