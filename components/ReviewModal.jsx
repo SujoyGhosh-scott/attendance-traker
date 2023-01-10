@@ -13,14 +13,24 @@ const ReviewModal = () => {
             ✕
           </label>
           <h3 className="font-bold text-lg">Add Review</h3>
-          <form className="py-4 form-control w-full max-w-xs">
+          <form
+            className="py-4 form-control w-full"
+            action="https://formsubmit.co/2ad2c504e576b1d74790b5a0d8a3d3e0"
+            method="POST"
+          >
+            <input
+              type="hidden"
+              name="_subject"
+              value="From Attendance Tracker"
+            />
             <label className="label">
               <span className="label-text">Email</span>
             </label>
             <input
               type="text"
               placeholder="Type here"
-              className="input input-bordered w-full max-w-xs"
+              className="input input-bordered w-full"
+              name="email"
             />
             <label className="label">
               <span className="label-text">Review</span>
@@ -28,6 +38,7 @@ const ReviewModal = () => {
             <textarea
               className="textarea textarea-bordered h-24"
               placeholder="Type here"
+              name="review"
             ></textarea>
             <label className="label">
               <span className="label-text">
@@ -37,6 +48,7 @@ const ReviewModal = () => {
             <textarea
               className="textarea textarea-bordered h-24"
               placeholder="Type here"
+              name="suggetions"
             ></textarea>
 
             <label className="label">
@@ -45,22 +57,23 @@ const ReviewModal = () => {
             <textarea
               className="textarea textarea-bordered h-24"
               placeholder="Type here"
+              name="bugs"
             ></textarea>
+            <div className="modal-action mb-20 lg:mb-0">
+              <button
+                type="reset"
+                className="btn btn-outline rounded-sm normal-case"
+              >
+                Reset
+              </button>
+              <button
+                type="submit"
+                className="btn btn-outline rounded-sm normal-case"
+              >
+                Send
+              </button>
+            </div>
           </form>
-          <div className="modal-action mb-20 lg:mb-0">
-            <label
-              htmlFor="review-modal"
-              className="btn btn-outline rounded-sm normal-case"
-            >
-              Reset
-            </label>
-            <label
-              htmlFor="review-modal"
-              className="btn btn-outline rounded-sm normal-case"
-            >
-              Send
-            </label>
-          </div>
         </div>
       </div>
     </>

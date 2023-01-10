@@ -41,16 +41,14 @@ const About = () => {
           This is a website for students to keep track of their attendance
           percentage. The student has to log their attendance of different
           classes of every class day. If you&apos;re facing any issue while
-          login, please drop a message to the creator from the review
-          section(mentioning your contact details or mail), we will get back to
-          you.
+          login, please contact us through the review section, we will help you
+          out.
         </p>
         <br />
         <p className="w-full xl:w-4/5">
-          If you&apos;re using the site for sometime please give a moment to
-          drop a review, This will help us improve the application. And If you
-          find this project helpful, starring the repo or maybe following me on
-          gitHub would be appreciated.
+          You can help us improve the site by leaving a review. And if you find
+          the project useful, starring the repository or maybe following me on
+          GitHub would be appreciated.
         </p>
 
         <div className="mt-8 grid grid-cols-3">
