@@ -3,6 +3,9 @@ import moment from "moment";
 import SubRecord from "./SubRecord";
 import axios from "axios";
 
+//dse3 -> ML & DS
+//dse4 -> img pr
+
 const AttendanceCard = ({ date, subject, removeDate }) => {
   const [core11C, setCore11C] = useState(0);
   const [core11present, setCore11present] = useState(false);
@@ -17,13 +20,12 @@ const AttendanceCard = ({ date, subject, removeDate }) => {
 
   const addRecord = () => {
     console.log("adding record");
-    //get roll no from localstorage
+    let token = localStorage.getItem("at_token");
 
     //check if present in classes with count 0
     //check if total classes exceeds total class a day limit
 
     const payload = {
-      roll: 102,
       date,
       core11C,
       core11present,
@@ -39,7 +41,9 @@ const AttendanceCard = ({ date, subject, removeDate }) => {
     console.log(payload);
 
     axios
-      .post("/api/add-entry", payload)
+      .post("/api/add-entry", payload, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((res) => {
         console.log("resp: ", res.data);
         removeDate(date);
@@ -80,53 +84,68 @@ const AttendanceCard = ({ date, subject, removeDate }) => {
             </p>
           </div>
         </div>
-        <div className="grid grid-cols-5 items-center">
-          <SubRecord
-            subject="IOT &amp; VLSI"
-            classes={core11C}
-            setClasses={setCore11C}
-            present={core11present}
-            setPresent={setCore11present}
-          />
-        </div>
-        <div className="grid grid-cols-5 items-center">
-          <SubRecord
-            subject="DSE 3"
-            classes={dse3thC}
-            setClasses={setdse3thC}
-            present={dse3thPresent}
-            setPresent={setDse3ThPresent}
-          />
-        </div>
-        {/* show prac based on day */}
-        <div className="grid grid-cols-5 items-center">
-          <SubRecord
-            subject="DSE 3 Pr"
-            classes={dse3prC}
-            setClasses={setDse3PrC}
-            present={dse3PrPresent}
-            setPresent={setDse3PrPresent}
-          />
-        </div>
-        <div className="grid grid-cols-5 items-center">
-          <SubRecord
-            subject="DSE 4"
-            classes={dse4thC}
-            setClasses={setdse4thC}
-            present={dse4thPresent}
-            setPresent={setDse4ThPresent}
-          />
-        </div>
-        {/* show prac based on day */}
-        <div className="grid grid-cols-5 items-center">
-          <SubRecord
-            subject="DSE 4 Pr"
-            classes={dse4prC}
-            setClasses={setDse4PrC}
-            present={dse4PrPresent}
-            setPresent={setDse4PrPresent}
-          />
-        </div>
+        {(moment(date).format("ddd") === "Wed" ||
+          moment(date).format("ddd") === "Fri" ||
+          moment(date).format("ddd") === "Sat") && (
+          <div className="grid grid-cols-5 items-center">
+            <SubRecord
+              subject="IOT &amp; VLSI"
+              classes={core11C}
+              setClasses={setCore11C}
+              present={core11present}
+              setPresent={setCore11present}
+            />
+          </div>
+        )}
+        {(moment(date).format("ddd") === "Mon" ||
+          moment(date).format("ddd") === "Wed" ||
+          moment(date).format("ddd") === "Fri") && (
+          <div className="grid grid-cols-5 items-center">
+            <SubRecord
+              subject="ML &amp; DS"
+              classes={dse3thC}
+              setClasses={setdse3thC}
+              present={dse3thPresent}
+              setPresent={setDse3ThPresent}
+            />
+          </div>
+        )}
+        {moment(date).format("ddd") === "Mon" && (
+          <div className="grid grid-cols-5 items-center">
+            <SubRecord
+              subject="ML &amp; DS Pr"
+              classes={dse3prC}
+              setClasses={setDse3PrC}
+              present={dse3PrPresent}
+              setPresent={setDse3PrPresent}
+            />
+          </div>
+        )}
+        {(moment(date).format("ddd") === "Mon" ||
+          moment(date).format("ddd") === "Tue" ||
+          moment(date).format("ddd") === "Fri" ||
+          moment(date).format("ddd") === "Sat") && (
+          <div className="grid grid-cols-5 items-center">
+            <SubRecord
+              subject="Img Pro. Th"
+              classes={dse4thC}
+              setClasses={setdse4thC}
+              present={dse4thPresent}
+              setPresent={setDse4ThPresent}
+            />
+          </div>
+        )}
+        {moment(date).format("ddd") === "Tue" && (
+          <div className="grid grid-cols-5 items-center">
+            <SubRecord
+              subject="Img Pro. Pr"
+              classes={dse4prC}
+              setClasses={setDse4PrC}
+              present={dse4PrPresent}
+              setPresent={setDse4PrPresent}
+            />
+          </div>
+        )}
       </div>
       <div className="flex justify-end">
         <button

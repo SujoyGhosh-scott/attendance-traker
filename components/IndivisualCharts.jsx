@@ -30,7 +30,7 @@ const IndivisualCharts = ({
       </div>
       <div className="w-full md:w-1/2 lg:w-1/3 mt-4 lg:mt-0 lg:pr-6">
         <p>
-          DSE3: {getPercentage(dse3ThA + dse3PrA, dse3ThC + dse3PrC)}% (
+          ML &amp; DS: {getPercentage(dse3ThA + dse3PrA, dse3ThC + dse3PrC)}% (
           {dse3ThA + dse3PrA}/{dse3ThC + dse3PrC})
         </p>
         <p className="text-sm">
@@ -49,7 +49,8 @@ const IndivisualCharts = ({
       </div>
       <div className="w-full md:w-1/2 lg:w-1/3 mt-4 lg:mt-0 lg:pr-6">
         <p>
-          DSE4: {getPercentage(dse4ThA + dse4PrA, dse4ThC + dse4PrC)}% (
+          Image Processing:{" "}
+          {getPercentage(dse4ThA + dse4PrA, dse4ThC + dse4PrC)}% (
           {dse4ThA + dse4PrA}/{dse4ThC + dse4PrC})
         </p>
         <p className="text-sm">

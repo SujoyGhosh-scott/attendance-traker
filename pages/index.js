@@ -7,6 +7,7 @@ import OverallChart from "../components/OverallChart";
 import axios from "axios";
 import AttendanceCards from "../components/AttendanceCards";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 export default function Home() {
   const [loading, setLoading] = useState(true);
@@ -26,6 +27,44 @@ export default function Home() {
   const [dse4PrA, setDse4PrA] = useState(0);
 
   const router = useRouter();
+
+  const refreshData = () => {
+    let token = localStorage.getItem("at_token");
+
+    axios
+      .post(
+        "/api/data",
+        { roll: 102 },
+        { headers: { Authorization: `Bearer ${token}` } }
+      )
+      .then((res) => {
+        //console.log(res.data);
+        const { data } = res.data.user;
+        setName(res.data.user.name);
+        setCore11C(data.core11C);
+        setCore11A(data.core11A);
+        setDse3ThC(data.dse3ThC);
+        setDse3ThA(data.dse3ThA);
+        setDse3PrC(data.dse3PrC);
+        setDse3PrA(data.dse3PrA);
+        setDse4ThC(data.dse4ThC);
+        setDse4ThA(data.dse4ThA);
+        setDse4PrC(data.dse4PrC);
+        setDse4PrA(data.dse4PrA);
+
+        let nextDayOfLastUpdated = new Date(res.data.user.lastUpdated);
+        nextDayOfLastUpdated.setDate(nextDayOfLastUpdated.getDate() + 1);
+        setLastUpdated(nextDayOfLastUpdated);
+
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error(err.message);
+        localStorage.removeItem("at_token");
+        router.push("/auth/login");
+        return;
+      });
+  };
 
   useEffect(() => {
     let token = localStorage.getItem("at_token");
@@ -107,13 +146,37 @@ export default function Home() {
           <p className="text-gray-700">Want to add previous attendance?</p>
           <p className="text-gray-700">
             Click{" "}
-            <span className="text-primary font-semibold cursor-pointer">
-              here
-            </span>
+            <Link href="/edit-entries">
+              <span className="text-primary font-semibold cursor-pointer">
+                here
+              </span>
+            </Link>
           </p>
-          <h2 className="text-3xl text-primary font-bold mt-6 mb-3">
-            Your attendance percentage
-          </h2>
+          <div className="flex items-center">
+            <h2 className="text-3xl text-primary font-bold mt-6 mb-3">
+              Your attendance percentage
+            </h2>
+            <div
+              onClick={() => refreshData()}
+              className="tooltip tooltip-bottom ml-auto cursor-pointer"
+              data-tip="Refresh data"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-6 h-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
+                />
+              </svg>
+            </div>
+          </div>
           {loading ? (
             <div role="status">
               <svg

@@ -1,12 +1,12 @@
 //import DBconnect from "../../lib/db";
 import User from "../../lib/Models/User";
+import jwt from "jsonwebtoken";
 
 export default async function handler(req, res) {
   if (req.method === "POST") {
     //DBconnect().catch((error) => console.error(error.message));
 
     const {
-      roll,
       date,
       core11C,
       core11present,
@@ -19,13 +19,28 @@ export default async function handler(req, res) {
       dse4prC,
       dse4PrPresent,
     } = req.body;
-    if (!roll || !date) {
+    if (!date) {
       res.status(400).send({
         success: false,
-        message: "roll or date not provided",
+        message: "date not provided",
       });
       return;
     }
+
+    //console.log("token: ", req.headers.authorization.substring(7));
+    let token = req.headers.authorization.substring(7);
+
+    if (!token) {
+      res.status(400).send({
+        success: false,
+        error: "Token missing",
+      });
+    }
+
+    const verify = jwt.verify(token, process.env.JWT_SECRET);
+    console.log("verify: ", verify);
+
+    const { roll } = verify;
 
     const updateRecord = (
       data,

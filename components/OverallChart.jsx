@@ -99,8 +99,8 @@ const OverallChart = ({
           IOT &amp; VLSI Design:{" "}
           {((attendedCore11 / totalCore11) * 100).toFixed(2)}%
         </p>
-        <p>DSE 3: {((attendedDse3 / totalDse3) * 100).toFixed(2)}%</p>
-        <p>DSE 4: {((attendedDse4 / totalDse4) * 100).toFixed(2)}%</p>
+        <p>ML &amp; DS: {((attendedDse3 / totalDse3) * 100).toFixed(2)}%</p>
+        <p>Img Processing: {((attendedDse4 / totalDse4) * 100).toFixed(2)}%</p>
         <p>To see detailed breakdown, checkout the following charts</p>
       </div>
       <div className="w-full md:w-1/2">
