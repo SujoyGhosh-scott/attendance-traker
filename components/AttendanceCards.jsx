@@ -44,7 +44,7 @@ const AttendanceCards = ({ lastUpdated = "Jan 15, 2023" }) => {
   };
 
   return (
-    <div className="flex flex-nowrap mt-6 mb-6 pb-3 overflow-x-scroll ">
+    <div className="flex flex-nowrap mt-4 mb-4 pb-3 overflow-x-scroll ">
       {daylist.length > 0 ? (
         daylist.map((date) => (
           <AttendanceCard key={date} date={date} removeDate={removeDate} />

@@ -179,6 +179,11 @@ const Login = () => {
                 )}
               </button>
             </div>
+            {error.type === "error" && (
+              <p className="font-normal text-error mb-4 text-sm">
+                {error.message}
+              </p>
+            )}
             <button
               onClick={() => login()}
               className="btn rounded-sm text-lg normal-case comfortaa w-full btn-secondary shadow-md"

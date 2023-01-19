@@ -85,7 +85,11 @@ const EditEntries = () => {
         {data.length > 0 ? (
           <div className="flex flex-wrap">
             {data.map((entry, i) => (
-              <div className="border-2 p-2 mr-4 mb-4" key={i}>
+              <div
+                style={{ boxShadow: "-6px 6px #570DF8" }}
+                className="border-2 p-3 mr-5 mb-4"
+                key={i}
+              >
                 <p className="text-sm">
                   Date: {moment(entry.date).format("ddd, DD/MM/YYYY")}
                 </p>
@@ -109,6 +113,12 @@ const EditEntries = () => {
                   Image Pro. Pr: {entry.dse4PrC}&nbsp;
                   {entry.dse4PrC ? (entry.dse4PrP ? "(Pre)" : "(Abs)") : null}
                 </p>
+
+                <div className="flex justify-end">
+                  <button className="btn normal-case rounded-sm btn-secondary btn-sm mt-4">
+                    Update
+                  </button>
+                </div>
               </div>
             ))}
           </div>
