@@ -28,15 +28,9 @@ export default function Home() {
 
   const router = useRouter();
 
-  const refreshData = () => {
-    let token = localStorage.getItem("at_token");
-
+  const getData = (token) => {
     axios
-      .post(
-        "/api/data",
-        { roll: 102 },
-        { headers: { Authorization: `Bearer ${token}` } }
-      )
+      .post("/api/data", {}, { headers: { Authorization: `Bearer ${token}` } })
       .then((res) => {
         //console.log(res.data);
         const { data } = res.data.user;
@@ -66,6 +60,11 @@ export default function Home() {
       });
   };
 
+  const refreshData = () => {
+    let token = localStorage.getItem("at_token");
+    getData(token);
+  };
+
   useEffect(() => {
     let token = localStorage.getItem("at_token");
 
@@ -77,39 +76,7 @@ export default function Home() {
       return;
     }
 
-    axios
-      .post(
-        "/api/data",
-        { roll: 102 },
-        { headers: { Authorization: `Bearer ${token}` } }
-      )
-      .then((res) => {
-        //console.log(res.data);
-        const { data } = res.data.user;
-        setName(res.data.user.name);
-        setCore11C(data.core11C);
-        setCore11A(data.core11A);
-        setDse3ThC(data.dse3ThC);
-        setDse3ThA(data.dse3ThA);
-        setDse3PrC(data.dse3PrC);
-        setDse3PrA(data.dse3PrA);
-        setDse4ThC(data.dse4ThC);
-        setDse4ThA(data.dse4ThA);
-        setDse4PrC(data.dse4PrC);
-        setDse4PrA(data.dse4PrA);
-
-        let nextDayOfLastUpdated = new Date(res.data.user.lastUpdated);
-        nextDayOfLastUpdated.setDate(nextDayOfLastUpdated.getDate() + 1);
-        setLastUpdated(nextDayOfLastUpdated);
-
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error(err.message);
-        localStorage.removeItem("at_token");
-        router.push("/auth/login");
-        return;
-      });
+    getData(token);
   }, []);
 
   return (
@@ -143,7 +110,7 @@ export default function Home() {
             <AttendanceCards lastUpdated={lastUpdated} />
           )}
 
-          <p className="text-gray-700">Want to add previous attendance?</p>
+          <p className="text-gray-700">Want to edit previous entries?</p>
           <p className="text-gray-700">
             Click{" "}
             <Link href="/edit-entries">
@@ -224,7 +191,7 @@ export default function Home() {
                 dse3ThA={dse3ThA}
                 dse3PrA={dse3PrA}
                 dse4ThC={dse4ThC}
-                dse4PrC={dse3PrC}
+                dse4PrC={dse4PrC}
                 dse4ThA={dse4ThA}
                 dse4PrA={dse4PrA}
               />
