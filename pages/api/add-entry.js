@@ -1,11 +1,8 @@
-//import DBconnect from "../../lib/db";
 import User from "../../lib/Models/User";
 import jwt from "jsonwebtoken";
 
 export default async function handler(req, res) {
   if (req.method === "POST") {
-    //DBconnect().catch((error) => console.error(error.message));
-
     const {
       date,
       core11C,
