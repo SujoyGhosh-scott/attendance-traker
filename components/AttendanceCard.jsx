@@ -17,13 +17,24 @@ const AttendanceCard = ({ date, subject, removeDate }) => {
   const [dse4thPresent, setDse4ThPresent] = useState(false);
   const [dse4prC, setDse4PrC] = useState(0);
   const [dse4PrPresent, setDse4PrPresent] = useState(false);
+  const [errResp, setErrResp] = useState("");
 
   const addRecord = () => {
     console.log("adding record");
     let token = localStorage.getItem("at_token");
 
-    //check if present in classes with count 0
     //check if total classes exceeds total class a day limit
+
+    if (
+      (core11C === 0 && core11present === true) ||
+      (dse3thC === 0 && dse3thPresent === true) ||
+      (dse3prC === 0 && dse3PrPresent === true) ||
+      (dse4thC === 0 && dse4thPresent === true) ||
+      (dse4prC === 0 && dse4PrPresent === true)
+    ) {
+      setErrResp("cannot be present in class count of 0");
+      return;
+    }
 
     const payload = {
       date,
@@ -50,11 +61,8 @@ const AttendanceCard = ({ date, subject, removeDate }) => {
       })
       .catch((err) => {
         console.log(err.message);
-        //show alert error
+        setErrResp(err.message);
       });
-
-    //if successful, remove date from list to remove card
-    //otherwise show alert saying what went wrong
   };
 
   return (
@@ -147,6 +155,7 @@ const AttendanceCard = ({ date, subject, removeDate }) => {
           </div>
         )}
       </div>
+      {errResp && <p className="text-sm text-error">{errResp}</p>}
       <div className="flex justify-end">
         <button
           onClick={() => addRecord()}
