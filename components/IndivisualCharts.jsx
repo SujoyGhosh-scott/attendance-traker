@@ -24,8 +24,8 @@ const IndivisualCharts = ({
           {core11C})
         </p>
         <SubjectChart
-          dataSet={[getPercentage(core11A, core11C)]}
-          labels={["Total"]}
+          dataSet={[100, getPercentage(core11A, core11C)]}
+          labels={["Total", "Attendded"]}
         />
       </div>
       <div className="w-full md:w-1/2 lg:w-1/3 mt-4 lg:mt-0 lg:pr-6">
@@ -41,6 +41,7 @@ const IndivisualCharts = ({
         </p>
         <SubjectChart
           dataSet={[
+            100,
             getPercentage(dse3ThA + dse3PrA, dse3ThC + dse3PrC),
             getPercentage(dse3ThA, dse3ThC),
             getPercentage(dse3PrA, dse3PrC),
@@ -61,6 +62,7 @@ const IndivisualCharts = ({
         </p>
         <SubjectChart
           dataSet={[
+            100,
             getPercentage(dse4ThA + dse4PrA, dse4ThC + dse4PrC),
             getPercentage(dse4ThA, dse4ThC),
             getPercentage(dse4PrA, dse4PrC),
