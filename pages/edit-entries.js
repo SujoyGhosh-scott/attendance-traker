@@ -11,17 +11,17 @@ const EditEntries = () => {
 
   const [date, setDate] = useState(null);
   const [core11C, setCore11C] = useState(0);
-  const [core11P, setCore11P] = useState(false);
+  const [core11P, setCore11P] = useState(true);
 
   const [dse3ThC, setDse3ThC] = useState(0);
-  const [dse3ThP, setDse3ThP] = useState(false);
+  const [dse3ThP, setDse3ThP] = useState(true);
   const [dse3PrC, setDse3PrC] = useState(0);
-  const [dse3PrP, setDse3PrP] = useState(false);
+  const [dse3PrP, setDse3PrP] = useState(true);
 
   const [dse4ThC, setDse4ThC] = useState(0);
-  const [dse4ThP, setDse4ThP] = useState(false);
+  const [dse4ThP, setDse4ThP] = useState(true);
   const [dse4PrC, setDse4PrC] = useState(0);
-  const [dse4PrP, setDse4PrP] = useState(false);
+  const [dse4PrP, setDse4PrP] = useState(true);
 
   const router = useRouter();
 
@@ -53,7 +53,23 @@ const EditEntries = () => {
     setDse4PrP(d4PP);
   };
 
-  const updateEntry = () => {};
+  const updateEntry = () => {
+    console.log("updating entry");
+    const payload = {
+      date,
+      core11C,
+      core11P,
+      dse3ThC,
+      dse3ThP,
+      dse3PrC,
+      dse3PrP,
+      dse4ThC,
+      dse4ThP,
+      dse4PrC,
+      dse4PrP,
+    };
+    console.log(payload);
+  };
 
   const getData = (token) => {
     axios

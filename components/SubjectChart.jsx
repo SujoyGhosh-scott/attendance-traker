@@ -48,8 +48,8 @@ const SubjectChart = ({
       {
         label: "Dataset 1",
         data: dataSet,
-        borderColor: ["#793cfd", "#570DF8", "#F51CB8", "#F51CB8"],
-        backgroundColor: ["#793cfde6", "#570df8c9", "#f51cb8ac", "#f51cb8ac"],
+        borderColor: ["#570DF8", "#0ea5e9", "#F51CB8", "#F51CB8"],
+        backgroundColor: ["#570df8c9", "#7dd3fc", "#f51cb8ac", "#f51cb8ac"],
       },
     ],
   };

@@ -64,6 +64,13 @@ const SignUp = () => {
       })
       .then((res) => {
         console.log("resp: ", res.data);
+        if (!res.data.success) {
+          setError({
+            type: "error",
+            message: res.data.message,
+          });
+          return;
+        }
         setType("password");
         setName("");
         setRoll(null);
@@ -228,7 +235,7 @@ const SignUp = () => {
             </p>
             {error.type === "error" && (
               <p className="font-normal text-error mt-1 text-sm">
-                Something went wrong, please try again later.
+                {error.message}
               </p>
             )}
             <button

@@ -2,7 +2,7 @@ import moment from "moment";
 import React from "react";
 
 const SubjectRow = ({ subject, classes, setClasses, present, setPresent }) => {
-  console.log({ subject, classes, setClasses, present, setPresent });
+  console.log({ subject, classes, present });
   return (
     <>
       <div className="col-span-3 text-gray-600">{subject}</div>
@@ -31,7 +31,7 @@ const SubjectRow = ({ subject, classes, setClasses, present, setPresent }) => {
       <div className="col-span-1 text-gray-600 flex items-center">
         <input
           type="checkbox"
-          value={present}
+          checked={present}
           onChange={(e) => {
             console.log(!present);
             setPresent(!present);
@@ -126,13 +126,14 @@ const UpdateEntryModal = ({
           <div className="modal-action pb-16 md:pb-0">
             <label
               htmlFor="upate-entry-modal"
-              className="btn rounded-sm btn-info mr-3 normal-case"
+              className="btn rounded-sm btn-primary mr-3 normal-case"
             >
               Close
             </label>
             <label
+              onClick={updateEntry}
               htmlFor="upate-entry-modal"
-              className="btn rounded-sm btn-warning normal-case"
+              className="btn rounded-sm btn-secondary normal-case"
             >
               Update
             </label>

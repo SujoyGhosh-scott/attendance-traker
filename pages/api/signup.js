@@ -14,6 +14,16 @@ export default async function handler(req, res) {
     DBconnect().catch((error) => console.error(error.message));
 
     try {
+      const prevUser = User.findOne({ roll });
+
+      if (prevUser) {
+        res.status(200).send({
+          success: false,
+          message: "roll already exists",
+        });
+        return;
+      }
+
       const user = new User({
         userId: Date.now(),
         name,

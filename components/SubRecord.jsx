@@ -7,7 +7,7 @@ const SubRecord = ({ subject, classes, present, setPresent, setClasses }) => {
       <div className="col-span-1 flex">
         <input
           type="checkbox"
-          value={present}
+          checked={present}
           onChange={(e) => {
             console.log(!present);
             setPresent(!present);
