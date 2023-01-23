@@ -1,13 +1,59 @@
 import axios from "axios";
-import moment from "moment";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
+import EntryCard from "../components/EntryCard";
+import UpdateEntryModal from "../components/UpdateEntryModal";
 
 const EditEntries = () => {
   const [data, setData] = useState([]);
+
+  const [date, setDate] = useState(null);
+  const [core11C, setCore11C] = useState(0);
+  const [core11P, setCore11P] = useState(false);
+
+  const [dse3ThC, setDse3ThC] = useState(0);
+  const [dse3ThP, setDse3ThP] = useState(false);
+  const [dse3PrC, setDse3PrC] = useState(0);
+  const [dse3PrP, setDse3PrP] = useState(false);
+
+  const [dse4ThC, setDse4ThC] = useState(0);
+  const [dse4ThP, setDse4ThP] = useState(false);
+  const [dse4PrC, setDse4PrC] = useState(0);
+  const [dse4PrP, setDse4PrP] = useState(false);
+
   const router = useRouter();
+
+  const updateModalData = (
+    dt,
+    c11C,
+    c11P,
+    d3TC,
+    d3TP,
+    d3PC,
+    d3PP,
+    d4TC,
+    d4TP,
+    d4PC,
+    d4PP
+  ) => {
+    setDate(dt);
+    setCore11C(c11C);
+    setCore11P(c11P);
+
+    setDse3ThC(d3TC);
+    setDse3ThP(d3TP);
+    setDse3PrC(d3PC);
+    setDse3PrP(d3PP);
+
+    setDse4ThC(d4TC);
+    setDse4ThP(d4TP);
+    setDse4PrC(d4PC);
+    setDse4PrP(d4PP);
+  };
+
+  const updateEntry = () => {};
 
   const getData = (token) => {
     axios
@@ -86,39 +132,11 @@ const EditEntries = () => {
           <div className="flex flex-wrap">
             {data.map((entry, i) => (
               <div
-                style={{ boxShadow: "-6px 6px #570DF8" }}
-                className="border-2 p-3 mr-5 mb-4"
+                style={{ boxShadow: "-6px 6px #F000B8" }}
+                className="border-2 border-gray-800 p-3 mr-6 mb-4 w-48"
                 key={i}
               >
-                <p className="text-sm">
-                  Date: {moment(entry.date).format("ddd, DD/MM/YYYY")}
-                </p>
-                <p className="text-sm">
-                  IOT &amp; VLSI: {entry.core11C}&nbsp;
-                  {entry.core11C ? (entry.core11P ? "(Pre)" : "(Abs)") : null}
-                </p>
-                <p className="text-sm">
-                  ML &amp; DS: {entry.dse3ThC}&nbsp;
-                  {entry.dse3ThC ? (entry.dse3ThP ? "(Pre)" : "(Abs)") : null}
-                </p>
-                <p className="text-sm">
-                  ML &amp; DS Pr: {entry.dse3PrC}&nbsp;
-                  {entry.dse3PrC ? (entry.dse3PrP ? "(Pre)" : "(Abs)") : null}
-                </p>
-                <p className="text-sm">
-                  Image Pro: {entry.dse4ThC}&nbsp;
-                  {entry.dse4ThC ? (entry.dse4ThP ? "(Pre)" : "(Abs)") : null}
-                </p>
-                <p className="text-sm">
-                  Image Pro. Pr: {entry.dse4PrC}&nbsp;
-                  {entry.dse4PrC ? (entry.dse4PrP ? "(Pre)" : "(Abs)") : null}
-                </p>
-
-                <div className="flex justify-end">
-                  <button className="btn normal-case rounded-sm btn-secondary btn-sm mt-4">
-                    Update
-                  </button>
-                </div>
+                <EntryCard entry={entry} updateModalData={updateModalData} />
               </div>
             ))}
           </div>
@@ -126,6 +144,32 @@ const EditEntries = () => {
           <p>No records entered yet</p>
         )}
       </main>
+
+      {/* update entry modal */}
+      <UpdateEntryModal
+        date={date}
+        core11C={core11C}
+        setCore11C={setCore11C}
+        core11P={core11P}
+        setCore11P={setCore11P}
+        dse3ThC={dse3ThC}
+        setDse3ThC={setDse3ThC}
+        dse3ThP={dse3ThP}
+        setDse3ThP={setDse3ThP}
+        dse3PrC={dse3PrC}
+        setDse3PrC={setDse3PrC}
+        dse3PrP={dse3PrP}
+        setDse3PrP={setDse3PrP}
+        dse4ThC={dse4ThC}
+        setDse4ThC={setDse4ThC}
+        dse4ThP={dse4ThP}
+        setDse4ThP={setDse4ThP}
+        dse4PrC={dse4PrC}
+        setDse4PrC={setDse4PrC}
+        dse4PrP={dse4PrP}
+        setDse4PrP={setDse4PrP}
+        updateEntry={updateEntry}
+      />
     </div>
   );
 };

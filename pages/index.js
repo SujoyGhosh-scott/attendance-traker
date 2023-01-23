@@ -101,6 +101,10 @@ export default function Home() {
             <strong>absent</strong> to get accurate percentage
           </p>
           <p className="text-gray-700">
+            If you were absent on some day, you still need to add the classes of
+            that day marking yourself absent.
+          </p>
+          <p className="text-gray-700">
             And please try to add the oldest record first, this helps generate
             the remaining attendance cards
           </p>
@@ -120,7 +124,7 @@ export default function Home() {
             </Link>
           </p>
           <div className="flex items-center">
-            <h2 className="text-3xl text-primary font-bold mt-6 mb-3">
+            <h2 className="text-3xl text-gray-700 font-bold mt-6 mb-3">
               Your attendance percentage
             </h2>
             <div
