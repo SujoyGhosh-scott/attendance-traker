@@ -64,23 +64,24 @@ const SignUp = () => {
       })
       .then((res) => {
         console.log("resp: ", res.data);
-        if (!res.data.success) {
+        if (res.data.success) {
+          setType("password");
+          setName("");
+          setRoll(null);
+          setPassword("");
+          setConfirmPassword("");
+          setError({
+            type: null,
+            message: "",
+          });
+          router.push("/auth/login");
+        } else {
           setError({
             type: "error",
             message: res.data.message,
           });
           return;
         }
-        setType("password");
-        setName("");
-        setRoll(null);
-        setPassword("");
-        setConfirmPassword("");
-        setError({
-          type: null,
-          message: "",
-        });
-        router.push("/auth/login");
       })
       .catch((err) => {
         console.log("err: ", err.message);

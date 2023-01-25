@@ -14,7 +14,9 @@ export default async function handler(req, res) {
     DBconnect().catch((error) => console.error(error.message));
 
     try {
-      const prevUser = User.findOne({ roll });
+      const prevUser = await User.findOne({ roll });
+
+      console.log("prev user: ", prevUser);
 
       if (prevUser) {
         res.status(200).send({
