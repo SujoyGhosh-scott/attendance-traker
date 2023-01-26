@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import EntryCard from "../components/EntryCard";
+import RespAlert from "../components/RespAlert";
 import UpdateEntryModal from "../components/UpdateEntryModal";
 
 const EditEntries = () => {
@@ -22,6 +23,10 @@ const EditEntries = () => {
   const [dse4ThP, setDse4ThP] = useState(true);
   const [dse4PrC, setDse4PrC] = useState(0);
   const [dse4PrP, setDse4PrP] = useState(true);
+  const [resp, setResp] = useState({
+    type: null,
+    message: "",
+  });
 
   const router = useRouter();
 
@@ -55,7 +60,9 @@ const EditEntries = () => {
 
   const updateEntry = () => {
     console.log("updating entry");
-    const payload = {
+    let token = localStorage.getItem("at_token");
+
+    const newData = {
       date,
       core11C,
       core11P,
@@ -68,7 +75,35 @@ const EditEntries = () => {
       dse4PrC,
       dse4PrP,
     };
-    console.log(payload);
+    console.log("new Data: ", newData);
+
+    axios
+      .post(
+        "/api/update-entry",
+        { date, updatedValue: newData },
+        { headers: { Authorization: `Bearer ${token}` } }
+      )
+      .then((res) => {
+        console.log("updated entries: ", res.data);
+        if (res.data.success) {
+          setResp({
+            type: "success",
+            message: "Successfully updated",
+          });
+          setData(res.data.entries);
+        } else {
+          setResp({
+            type: "error",
+            message: res.data.message,
+          });
+        }
+      })
+      .catch((err) => {
+        setResp({
+          type: "error",
+          message: err.message,
+        });
+      });
   };
 
   const getData = (token) => {
@@ -143,6 +178,9 @@ const EditEntries = () => {
         <p className="w-full xl:w-4/5">
           Edit previously added entries from here
         </p>
+        {/* resp alert */}
+        {resp.type !== null && <RespAlert resp={resp} setResp={setResp} />}
+
         <br />
         {data.length > 0 ? (
           <div className="flex flex-wrap">

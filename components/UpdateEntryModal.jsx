@@ -2,7 +2,7 @@ import moment from "moment";
 import React from "react";
 
 const SubjectRow = ({ subject, classes, setClasses, present, setPresent }) => {
-  console.log({ subject, classes, present });
+  //console.log({ subject, classes, present });
   return (
     <>
       <div className="col-span-3 text-gray-600">{subject}</div>
